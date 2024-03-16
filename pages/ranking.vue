@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const route = useRoute()
+
 </script>
 
 <template>
-  <div>
-
-  </div>
+  <h1>Tu będzie ranking</h1>
 </template>
+
+<style scoped>
+
+</style>
