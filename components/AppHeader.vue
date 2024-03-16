@@ -24,6 +24,7 @@ const items = [
 
     <UButton to="/user/collection"  class="ml-4">Kolekcja</UButton>
     <UButton to="/user/achievements"  class="ml-4">Osiągnięcia</UButton>
+    <UButton to="/ranking" class="ml-4">Ranking</UButton>
 
     <div class="absolute right-2">
       <UDropdown v-if="!isLogged" :items="items" :popper="{ placement: 'bottom-start' }">

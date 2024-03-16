@@ -41,8 +41,6 @@ console.log(color)
         <h2>Postęp: x/y</h2>
         <UProgress class="" :value="2" :max="10"/>
       </div>
-
-
     </div>
   </UCard>
 
