@@ -1,14 +1,38 @@
 <script setup lang="ts">
-console.log("")
+const items = [
+  [{
+    label: 'Zaloguj się',
+    to: '/login'
+  }],
+
+  [{
+    label: 'Zarejestruj się',
+    to: '/register'
+
+  }]
+]
+
+ let isLogged = ref(false); //tu zmienić aby pobierało z local store TODO
 </script>
 
 <template>
-  <div class="flex items-center p-3 m-3">
+  <Title>Strona główna</Title>
+<!--  TODO wymienić? na https://ui.nuxt.com/components/horizontal-navigation-->
+  <div class="flex items-center justify-center p-3 m-3">
     <img src="/favicon.ico">
     <UButton to="/" class="ml-4">Strona główna</UButton>
-    <UButton to="/login"  class="ml-4">Logowanie</UButton>
+
     <UButton to="/user/collection"  class="ml-4">Kolekcja</UButton>
     <UButton to="/user/achievements"  class="ml-4">Osiągnięcia</UButton>
+
+    <div>
+      <UDropdown v-if="!isLogged" :items="items" :popper="{ placement: 'bottom-start' }">
+        <UButton color="white" label="Moje konto" trailing-icon="i-heroicons-chevron-down-20-solid" />
+      </UDropdown>
+      <UButton v-else to="/"  class="ml-4">Wyloguj się</UButton>
+    </div>
+
+
 
   </div>
 
