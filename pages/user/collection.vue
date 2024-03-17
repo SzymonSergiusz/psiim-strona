@@ -19,7 +19,9 @@ let collectionSize = ref(100)
 
     <div class="overflow-x-auto flex flex-wrap justify-items-center justify-start">
 
-        <MountainCard  v-for="index in collectedByUser" :key="index"/>
+
+          <MountainCard v-for="index in collectedByUser" :key="index"/>
+
 
     </div>
 
