@@ -1,0 +1,20 @@
+-- Strona główna 
+    dopisać na czym ma to polega itd jakiś wstęp
+
+-- Kolekcja
+    fetchowanie z serwera
+
+-- Osiągnięcia
+    fetchowanie z serwera
+
+-- Layout
+    ukryć routes dostępne tylko dla zalogowanych uzytkowników?
+
+-- Ranking
+    komponent do wyświetlania pojedynczego uzytkownika (miejsce w ranking, nazwa, ?)
+    fetchowanie z serwera
+
+-- Ogólnie
+    dodać favicon jakiś górski
+    trochę zmienić kolorystyke tzn primary colory itd
+    na samym końcu dorobić szczegóły, jakieś animacje moze i estetyke poprawić
