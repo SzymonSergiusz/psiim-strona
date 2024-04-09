@@ -3,8 +3,9 @@
 </script>
 
 <template>
-
-  <p>Tu będzie footer</p>
+  <footer class="bg-primary-500 py-4 text-center mt-10">
+    <p class="text-gray-900 text-lg">© 2024 Korona Gór Polski</p>
+  </footer>
 </template>
 
 <style scoped>
