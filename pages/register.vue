@@ -38,27 +38,28 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <div class="w-1/4">
-    <UForm :schema="schema" :state="state" @submit="onSubmit" class="space-y-4">
-      <UFormGroup label="Nazwa użytkownika" name="username">
-        <UInput v-model="state.username" placeholder="Podaj swoją nazwę" icon="i-heroicons-user"></UInput>
-      </UFormGroup>
-      <UFormGroup label="Email" name="email">
-        <UInput v-model="state.email" placeholder="Podaj swój email" icon="i-heroicons-envelope"></UInput>
-      </UFormGroup>
+  <div class="w-full flex justify-center mt-10">
+    <div class="w-1/4">
+      <UForm :schema="schema" :state="state" @submit="onSubmit" class="space-y-4">
+        <UFormGroup label="Nazwa użytkownika" name="username">
+          <UInput v-model="state.username" placeholder="Podaj swoją nazwę" icon="i-heroicons-user"></UInput>
+        </UFormGroup>
+        <UFormGroup label="Email" name="email">
+          <UInput v-model="state.email" placeholder="Podaj swój email" icon="i-heroicons-envelope"></UInput>
+        </UFormGroup>
 
-      <UFormGroup label="Hasło" name="password">
-        <UInput type="password" v-model="state.password" placeholder="Wpisz hasło" icon="i-heroicons-lock-closed"></UInput>
-      </UFormGroup>
+        <UFormGroup label="Hasło" name="password">
+          <UInput type="password" v-model="state.password" placeholder="Wpisz hasło" icon="i-heroicons-lock-closed"></UInput>
+        </UFormGroup>
 
-      <UFormGroup label="Powtórz hasło" name="repeatPassword">
-        <UInput type="password" v-model="state.repeatPassword" placeholder="Powtórz hasło" icon="i-heroicons-check-circle"></UInput>
-      </UFormGroup>
+        <UFormGroup label="Powtórz hasło" name="repeatPassword">
+          <UInput type="password" v-model="state.repeatPassword" placeholder="Powtórz hasło" icon="i-heroicons-check-circle"></UInput>
+        </UFormGroup>
 
-      <UButton type="submit">
-        Stwórz konto
-      </UButton>
-    </UForm>
-
+        <UButton type="submit">
+          Stwórz konto
+        </UButton>
+      </UForm>
+    </div>
   </div>
 </template>

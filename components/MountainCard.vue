@@ -6,7 +6,7 @@ let id = 1
   <UCard class="w-1/5 m-1" >
 
     <template #header>
-      <h1>Nazwa góry/schroniska</h1>
+      <h1>Nazwa szczytu</h1>
     </template>
     <template #default>
       <NuxtImg src="/mountain.webp" class=""></NuxtImg>
@@ -14,7 +14,7 @@ let id = 1
     </template>
 
     <template #footer>
-      Krótki opis + Tutaj źródło zdjęcia?
+      Krótki opis
       <UButton to="/mountain{{id}}">
         Więcej
       </UButton>
