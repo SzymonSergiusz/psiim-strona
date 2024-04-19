@@ -16,8 +16,8 @@ const route = useRoute()
     </div>
 
     <div class="text-white">
-      <div class="container mx-auto flex flex-col">
-        <div class="flex justify-center flex-wrap text-center items-center">
+      <div class="mx-auto flex flex-col">
+        <div class="flex justify-center flex-wrap text-center">
           <div class="max-w-sm mx-2">
             <h2 class="text-xl font-bold mb-2">Staw czoła wyzwaniom</h2>
             <p class="text-lg">Zdobywanie szczytów w naszej aplikacji to nie tylko przyjemność z eksploracji, ale także szansa na zdobycie unikalnych osiągnięć, które będą widoczne w Twoim profilu.</p>
@@ -35,7 +35,7 @@ const route = useRoute()
             <p class="text-lg">Nie zwlekaj - stwórz konto i rozpocznij swoją przygodę już dziś! Zdobywaj szczyty, odblokowuj osiągnięcia, uczestnicz w dyskusjach na forum oraz zdobądź bezcenne wspomnienia, które zostaną z Tobą na zawsze.</p>
           </div>
         </div>
-        <nuxt-link to="/register" class="bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-6 rounded-lg mt-8 mx-auto">Zapisz się już teraz!</nuxt-link>
+        <nuxt-link to="/register" class="bg-primary-500 hover:bg-primary-600 text-black font-bold py-3 px-6 rounded-lg mt-8 mx-auto">Zapisz się już teraz!</nuxt-link>
       </div>
     </div>
   </div>
