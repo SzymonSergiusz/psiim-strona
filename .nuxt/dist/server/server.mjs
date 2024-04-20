@@ -1,1 +1,1 @@
-export { default } from "file:///C:/Users/kacpe/Documents/studia/psim/psiim-strona/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
+export { default } from "file:///C:/Users/piotr/Desktop/PSIM/PSIM_Strona/psiim-strona/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

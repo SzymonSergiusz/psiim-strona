@@ -7,12 +7,12 @@
     "module": true,
     "resourceType": "script"
   },
-  "C:/Users/kacpe/Documents/studia/psim/psiim-strona/node_modules/nuxt/dist/app/entry.js": {
+  "C:/Users/piotr/Desktop/PSIM/PSIM_Strona/psiim-strona/node_modules/nuxt/dist/app/entry.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
     "isEntry": true,
-    "file": "C:/Users/kacpe/Documents/studia/psim/psiim-strona/node_modules/nuxt/dist/app/entry.js"
+    "file": "C:/Users/piotr/Desktop/PSIM/PSIM_Strona/psiim-strona/node_modules/nuxt/dist/app/entry.js"
   }
 }
