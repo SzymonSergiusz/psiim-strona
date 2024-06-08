@@ -1,1 +1,0 @@
-export { default } from "file:///Users/sergiusz/Documents/studia/6-semestr/PSIIM/psiim-projekt/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
