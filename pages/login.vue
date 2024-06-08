@@ -16,9 +16,43 @@ const state = reactive({
   email: '',
   password: ''
 })
+const config = useRuntimeConfig();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  const serverUrl = config.public.serverUrl
+  const toast = useToast()
+
   console.log(event.data)
+  try {
+    const result = await $fetch(`${serverUrl}/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        username: event.data.email,
+        password: event.data.password,
+      }),
+    });
+
+    if (result.access_token) {
+      toast.add({
+        title: 'Sukces',
+        description: 'Logowanie się udało.',
+        type: 'success',
+      });
+
+      localStorage.setItem('access_token', result.access_token);
+      await navigateTo('/');
+    }
+  } catch (error) {
+    console.error('Błąd:', error);
+    toast.add({
+      title: 'Nie udało się zalogować',
+      description: 'Upewnij się, że podałeś poprawne dane logowania.',
+      type: 'error',
+    });
+  }
 }
 </script>
 

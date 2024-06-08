@@ -3,8 +3,6 @@
 import type {FormSubmitEvent} from "#ui/types";
 import {object, custom, forward, email, type Input, minLength, objectAsync, string, ValiError, customAsync,} from "valibot";
 
-const route = useRoute()
-
 
 const schema = objectAsync({
   email: string([email('Niepoprawny email')]),
@@ -23,6 +21,7 @@ const schema = objectAsync({
 )
 
 type Schema = Input<typeof schema>
+const toast = useToast()
 
 const state = reactive({
   email: '',
@@ -30,11 +29,49 @@ const state = reactive({
   repeatPassword: '',
   username: ''
 })
+const config = useRuntimeConfig();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-
   console.log(event.data)
+
+  const serverUrl = config.public.serverUrl
+  const clientUrl = config.public.clientUrl
+  const toast = useToast()
+
+  try {
+    let result = await $fetch(`${serverUrl}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: event.data.username,
+        email: event.data.email,
+        password: event.data.password,
+        repeat_password: event.data.repeatPassword
+      }),
+      mode: 'cors'
+    })
+
+    if (result['status'] === 'success') {
+      await navigateTo(`${clientUrl}/login`, { external: true })
+    } else {
+      toast.add({
+        title: 'Wystąpił błąd',
+        description: 'Nie udało się stworzyć nowego konta.',
+        type: 'error'
+      })
+    }
+  } catch (error) {
+    console.error('Error:', error)
+    toast.add({
+      title: 'Błąd',
+      description: 'Wystąpił błąd podczas rejestracji. Spróbuj ponownie.',
+      type: 'error'
+    })
+  }
 }
+
 </script>
 
 <template>
@@ -59,6 +96,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <UButton type="submit">
           Stwórz konto
         </UButton>
+
       </UForm>
     </div>
   </div>
