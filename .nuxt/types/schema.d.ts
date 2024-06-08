@@ -21,7 +21,9 @@ declare module 'nuxt/schema' {
    },
   }
   interface PublicRuntimeConfig {
+   serverUrl: string,
 
+   clientUrl: string,
   }
 }
 declare module 'vue' {
