@@ -21,6 +21,7 @@ const items = [
   <div class="flex items-center justify-center p-3 m-3">
     <img src="/favicon.ico">
     <UButton to="/" class="ml-4">Strona główna</UButton>
+    <UButton to="/mountains"  class="ml-4">Wszystkie szczyty</UButton>
 
     <UButton to="/user/collection"  class="ml-4">Kolekcja</UButton>
     <UButton to="/user/achievements"  class="ml-4">Osiągnięcia</UButton>
