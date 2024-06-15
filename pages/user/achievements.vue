@@ -20,7 +20,12 @@ const totalAchievements = ref(0);
 
 async function getAchievements() {
   try {
-    const response = await fetch(`${serverUrl}/achievements/users_achievements`);
+    const response = await fetch(`${serverUrl}/achievements/users_achievements`, {
+    headers: {
+    'Authorization': `Bearer ${localStorage.getItem("access_token")}`,
+    'Accept': 'application/json'
+  }
+});
     if (response.status === 401) {
           throw new Error('Unauthorized');
         }
@@ -56,7 +61,7 @@ onMounted(() => {
 <!--https://ui.nuxt.com/components/tabs#slots-->
 <template>
   <div class="p-2.5 m-2.5">
-    <h2>Twoje postępy:</h2>
+    <h2>Twoje postępy: {{achievedCount}}/{{totalAchievements}}</h2>
     <UProgress :value="achievedCount" :max="totalAchievements"/>
   </div>
   <div class="flex justify-center">
