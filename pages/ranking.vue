@@ -1,35 +1,43 @@
 <script setup lang="ts">
-const links = [{
-  label: 'Odblokowane',
-  icon: "i-heroicons-lock-open"
-},
-  {
-    label: 'Do odblokowania',
-    icon: "i-heroicons-lock-closed"
-  }
+// import { ref, onMounted } from 'vue';
 
-]
+const config = useRuntimeConfig();
+const serverUrl = config.public.serverUrl;
+
+const ranking = ref([]);
+
+async function getRanking() {
+  try {
+    const response = await fetch(`${serverUrl}/ranking`);
+    const data = await response.json();
+    ranking.value = data.ranking.sort((a, b) => b.count - a.count);
+    // console.log(ranking.value)
+    // console.log(data)
+  } catch (error) {
+    console.error('Error fetching ranking:', error);
+  }
+}
+
+onMounted(() => {
+  getRanking();
+});
+
+
 </script>
 <!--https://ui.nuxt.com/components/tabs#slots-->
 <template>
   <div class="flex justify-center">
-
-    <div class="flex flex-col items-center w-5/6 ">
-      <UserCardRanking :place="1"/>
-      <UserCardRanking :place="2"/>
-      <UserCardRanking :place="3"/>
-      <UserCardRanking :place="4"/>
-      <UserCardRanking :place="5"/>
-      <UserCardRanking :place="6"/>
-      <UserCardRanking :place="7"/>
-      <UserCardRanking :place="8"/>
-      <UserCardRanking :place="9"/>
-      <UserCardRanking :place="10"/>
+    <div class="flex flex-col items-center w-5/6">
+      <UserCardRanking
+        v-for="(r, index) in ranking"
+        :key="r.username"
+        :username="r.username"
+        :count="r.count"
+        :rank="index + 1"
+        :class="index === 0 ? 'text-yellow-500 font-bold' : 'text-white'"
+      />
     </div>
   </div>
-
-
-
 </template>
 
 <style scoped>
