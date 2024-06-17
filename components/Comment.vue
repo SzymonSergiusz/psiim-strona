@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { defineProps } from 'vue';
+const config = useRuntimeConfig();
+const serverUrl = config.public.serverUrl
+
+const content = ref('');
+
+const toast = useToast();
 
 // Definicja typów dla właściwości komponentu
 const props = defineProps({
@@ -17,6 +23,48 @@ const isFormVisible = ref(false);
 const toggleFormVisibility = () => {
   isFormVisible.value = !isFormVisible.value;
 };
+async function answer() {
+  let user_id = localStorage.getItem('user_id');
+  console.log(user_id,props.comment.mountain_id, props.comment.root_comment_id, props.comment.content)
+  try {
+    const response = await $fetch(`${serverUrl}/comments/answer`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: user_id,
+        mountain_id: props.comment.mountain_id,
+        root_comment_id: props.comment.comment_id,
+        content: content.value,
+      }),
+    });
+    if (response == 200) {
+      toast.add({
+        title: 'Sukces',
+        description: 'Udało się dodać komentarz!',
+        type: 'success',
+      });
+      window.location.reload();
+    } else {
+      toast.add({
+        title: 'Błąd',
+        description: 'Nie udało się dodać komentarza.',
+        type: 'error',
+      });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    toast.add({
+      title: 'Błąd',
+      description: 'Wystąpił błąd podczas dodawania komentarza.',
+      type: 'error',
+    });
+  }
+}
+
 </script>
 
 <template>
@@ -33,20 +81,10 @@ const toggleFormVisibility = () => {
       <span v-if="isFormVisible"> ▼ Schowaj odpowiedzi</span>
       <span v-else> ▶ Pokaż odpowiedzi</span>
     </button>
-    <!-- Conditionally render the form -->
     <UForm v-if="isFormVisible" class="p-1 m-1">
       <CommentReply v-for="reply in comment.responses" :key="reply.comment_id" :comment="reply" />
-      <UTextarea placeholder="Wpisz odpowiedź"></UTextarea>
-      <UButton class="mt-2">Odpowiedz</UButton>
+      <UTextarea v-model="content" placeholder="Wpisz odpowiedź"></UTextarea>
+      <UButton class="mt-2" @click="answer">Odpowiedz</UButton>
     </UForm>
   </div>
 </template>
-
-<!-- <style scoped>
-/* Optional: Add some additional styling to your button */
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-</style> -->

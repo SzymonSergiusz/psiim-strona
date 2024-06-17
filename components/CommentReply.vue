@@ -22,7 +22,7 @@ const props = defineProps({
 <template>
   <div class="comment border border-gray-300 p-4 mb-4 rounded-lg bg-slate-900">
     <div class="comment-header flex justify-between mb-2">
-      <span class="comment-username font-bold">{{ comment.user_id }}</span>
+      <span class="comment-username font-bold">{{ comment.username }}</span>
       <span class="comment-date text-gray-400 text-sm">{{ comment.created_at }}</span>
     </div>
     <div class="comment-content text-base leading-relaxed">

@@ -7,62 +7,53 @@ const serverUrl = config.public.serverUrl;
 
 const achievedMountains = ref([]);
 const notAchievedMountains = ref([]);
-const collectedByUser = ref(0) 
-const collectionSize = ref(0)
+const collectedByUser = ref(0);
+const collectionSize = ref(0);
+const isLogged = ref(false);
 
-async function getMountains() {
-  try {
-    const response = await fetch(`${serverUrl}/api/mountains/users_mountains`, {
-    headers: {
-    'Authorization': `Bearer ${localStorage.getItem("access_token")}`,
-    'Accept': 'application/json'
+onMounted(() => {
+  if (process.client) {
+    isLogged.value = !!localStorage.getItem('access_token');
   }
 });
 
-    if (response.status === 401) {
-          throw new Error('Unauthorized');
-        }
-    const data = await response.json();
-    achievedMountains.value = data.achieved;
-    notAchievedMountains.value = data.not_achieved;
-    collectedByUser.value = data.achieved_count;
-    collectionSize.value = data.achieved_count + data.not_achieved_count;
+async function getMountains() {
+  try {
+    const response = await $fetch(`${serverUrl}/api/mountains/users_mountains`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("access_token")}`,
+        'Accept': 'application/json'
+      },
+      mode: 'cors'
+    });
+    achievedMountains.value = response.achieved;
+    notAchievedMountains.value = response.not_achieved;
+    collectedByUser.value = response.achieved_count;
+    collectionSize.value = response.achieved_count + response.not_achieved_count;
   } catch (error) {
-    if (error.message === 'Unauthorized') {
-      window.location.replace('/login');
-      }
-      console.log(error);
+    if (!isLogged.value) {
+      await navigateTo('/login');
     }
+    console.log(error);
+  }
 }
 
 onMounted(() => {
   getMountains();
 });
-
-
-
 </script>
 
 <template>
-<!--  https://ui.nuxt.com/components/progress -->
-<!--https://ui.nuxt.com/components/skeleton to można dodać aby był placeholder w trakcie pobierania danych-->
-<!--  https://ui.nuxt.com/components/notification-->
-
   <div class="p-2.5 m-2.5">
-    <h2 >Twoje postępy: {{ collectedByUser }} / {{ collectionSize }} </h2>
-    <UProgress :value="collectedByUser" :max="collectionSize"/>
+    <h2>Twoje postępy: {{ collectedByUser }} / {{ collectionSize }}</h2>
+    <UProgress :value="collectedByUser" :max="collectionSize" />
   </div>
 
-
-    <div class="overflow-x-auto flex flex-wrap justify-items-center justify-center">
-      <MountainCard v-for="mountain in achievedMountains" :key="mountain.mountain_id" :mountain="mountain"/>
-    </div>
-
-
-
-
+  <div class="overflow-x-auto flex flex-wrap justify-items-center justify-center">
+    <MountainCard v-for="mountain in achievedMountains" :key="mountain.mountain_id" :mountain="mountain" />
+  </div>
 </template>
 
 <style scoped>
-
 </style>

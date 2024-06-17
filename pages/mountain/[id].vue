@@ -43,8 +43,9 @@ onMounted(() => {
       <USkeleton class="h-[150px] w-[550px]" :ui="{ rounded: 'rounded-full' }"/>
     </div>
 
-    <div class="p-2.5 m-2.5">
-      <CommentInput />
+    <div v-if="mountainData" class="p-2.5 m-2.5">
+      <CommentInput :mountain_id="mountainData.mountain_id" />
+
     </div>
 
     <UDivider>Sekcja komentarzy</UDivider>

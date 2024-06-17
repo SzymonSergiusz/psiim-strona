@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import {onMounted} from "vue";
+
 const items = [
   [{
     label: 'Zaloguj się',
@@ -12,7 +14,18 @@ const items = [
   }]
 ]
 
- let isLogged = ref(false); //tu zmienić aby pobierało z local store TODO
+let isLogged = ref(false);
+onMounted(() => {
+  if (process.client) {
+    isLogged.value = !!localStorage.getItem('access_token');
+  }
+});
+
+function logout() {
+  localStorage.setItem('access_token', '')
+  localStorage.setItem('user_id', '')
+  window.location.reload()
+}
 </script>
 
 <template>
@@ -31,7 +44,7 @@ const items = [
       <UDropdown v-if="!isLogged" :items="items" :popper="{ placement: 'bottom-start' }">
         <UButton color="white" label="Moje konto" trailing-icon="i-heroicons-chevron-down-20-solid" />
       </UDropdown>
-      <UButton v-else to="/"  class="ml-4">Wyloguj się</UButton>
+      <UButton v-else @click="logout" to="/" class="ml-4">Wyloguj się</UButton>
     </div>
 
 

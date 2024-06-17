@@ -42,8 +42,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         type: 'success',
       });
 
-      localStorage.setItem('access_token', result.access_token);
-      await navigateTo('/');
+      localStorage.setItem('access_token', result.access_token)
+      localStorage.setItem('user_id', result.user_id)
+
+      await navigateTo('/')
     }
   } catch (error) {
     console.error('Błąd:', error);
@@ -65,7 +67,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         </UFormGroup>
 
         <UFormGroup label="Hasło" name="password">
-          <UInput v-model="state.password" placeholder="Wpisz hasło" icon="i-heroicons-lock-closed"></UInput>
+          <UInput type="password" v-model="state.password" placeholder="Wpisz hasło" icon="i-heroicons-lock-closed"></UInput>
         </UFormGroup>
 
         <UButton type="submit">
