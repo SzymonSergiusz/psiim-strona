@@ -1,9 +1,46 @@
 <script setup lang="ts">
-
+import { ref, onMounted } from 'vue';
 import MountainCard from "~/components/MountainCard.vue";
 
-let collectedByUser = ref(20) //todo póki nie ma serweera
-let collectionSize = ref(100)
+const config = useRuntimeConfig();
+const serverUrl = config.public.serverUrl;
+
+const achievedMountains = ref([]);
+const notAchievedMountains = ref([]);
+const collectedByUser = ref(0) 
+const collectionSize = ref(0)
+
+async function getMountains() {
+  try {
+    const response = await fetch(`${serverUrl}/api/mountains/users_mountains`, {
+    headers: {
+    'Authorization': `Bearer ${localStorage.getItem("access_token")}`,
+    'Accept': 'application/json'
+  }
+});
+
+    if (response.status === 401) {
+          throw new Error('Unauthorized');
+        }
+    const data = await response.json();
+    achievedMountains.value = data.achieved;
+    notAchievedMountains.value = data.not_achieved;
+    collectedByUser.value = data.achieved_count;
+    collectionSize.value = data.achieved_count + data.not_achieved_count;
+  } catch (error) {
+    if (error.message === 'Unauthorized') {
+      window.location.replace('/login');
+      }
+      console.log(error);
+    }
+}
+
+onMounted(() => {
+  getMountains();
+});
+
+
+
 </script>
 
 <template>
@@ -18,11 +55,7 @@ let collectionSize = ref(100)
 
 
     <div class="overflow-x-auto flex flex-wrap justify-items-center justify-center">
-
-<!--TODO -->
-<!--          <MountainCard v-for="index in collectedByUser" :key="index"/>-->
-
-
+      <MountainCard v-for="mountain in achievedMountains" :key="mountain.mountain_id" :mountain="mountain"/>
     </div>
 
 
