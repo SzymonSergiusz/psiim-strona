@@ -6,8 +6,10 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      serverUrl: 'http://localhost:8000',
-      clientUrl: 'http://localhost:3000'
+      serverUrl: 'https://kgpserver1-dy0kgj6dn-szymonsergiuszs-projects.vercel.app/',
+      // serverUrl: 'http://localhost:8000',
+      clientUrl: 'https://koronagorpolskich.vercel.app/'
+      // clientUrl: 'http://localhost:3000'
     }
   },
 
