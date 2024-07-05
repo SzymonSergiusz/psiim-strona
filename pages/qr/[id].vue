@@ -32,7 +32,7 @@ async function addToCollection() {
     let user_id = localStorage.getItem('user_id')
     let mountain_id = mountainData.value.mountain_id
     console.log(user_id, mountain_id)
-    const response = await $fetch(`${serverUrl}/collection/add`, {
+    const response = await $fetch(`${serverUrl}/qr/${mountain_id}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("access_token")}`,
