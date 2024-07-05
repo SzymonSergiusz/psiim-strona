@@ -8,7 +8,7 @@ const mountains = ref([]);
 
 async function getMountains() {
   try {
-    const response = await fetch(`${serverUrl}/api/mountains`);
+    const response = await fetch(`${serverUrl}/api/mountains/`);
     const data = await response.json();
     mountains.value = data.mountains;
     console.log(mountains.value)
