@@ -45,7 +45,7 @@ async function addToCollection() {
       mode: 'cors'
     })
     console.log(response)
-    if (response == 200 || response == 201) {
+    if (response.status === 'success') {
 
       toast.add({
         title: 'Sukces',
