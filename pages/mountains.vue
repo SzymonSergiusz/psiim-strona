@@ -8,19 +8,9 @@ const mountains = ref([]);
 
 async function getMountains() {
   try {
-    // const response = await fetch(`${serverUrl}/api/mountains`);
-
-    const response = await $fetch(`${serverUrl}/comments/answer`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-        'Accept': 'application/json',
-        'Content-Type': 'text/json',
-      }
-    });
-
-    // const data = await response;
-    mountains.value = response['mountains'];
+    const response = await fetch(`${serverUrl}/api/mountains`);
+    const data = await response.json();
+    mountains.value = data.mountains;
     console.log(mountains.value)
   } catch (error) {
     console.error('Error fetching mountains:', error);
