@@ -44,7 +44,7 @@ async function addToCollection() {
       }),
       mode: 'cors'
     })
-    // console.log(response)
+    console.log(response)
     if (response == 200 || response == 201) {
 
       toast.add({
